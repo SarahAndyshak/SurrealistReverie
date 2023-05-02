@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import ReusableForm from "./ReusableForm";
 
 function DreamInput(props) {
-  function handleNewDreamSubmission(event) {
+  function handleEditingDreamInList(event) {
     event.preventDefault();
-    props.onNewDreamCreation({
+    props.onEditDream({
       place: event.target.place.value,
       length: event.target.length.value,
       characters: event.target.characters.value,
@@ -16,8 +16,8 @@ function DreamInput(props) {
   return (
     <>
       <ReusableForm
-        formSubmissionHandler={handleNewDreamSubmission}
-        buttonText="let's extol the glory of your dream" />
+        formSubmissionHandler={handleEditingDreamInList}
+        buttonText="Revise Reverie" />
     </>
   );
 }
