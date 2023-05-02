@@ -1,10 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Princess+Sofia&display=swap');
+
+:root {
+  --actual-height: 100vh;
+  --header-height: 5rem;
+  --footer-height: 3rem;
+}
+
+*, * *, * * * {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Princess Sofia', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: black;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  text-shadow: 0 0 0.5rem #00000099;
+}
+h2, h3, h4 {
+  font-weight: normal;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+input, textarea {
+  font-family: inherit;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.5rem 1rem;
+  align-self: center;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 300ms ease;
+  background-color: purple;
+}
+
+button:hover {
+  scale: 1.1;
 }
 
 code {

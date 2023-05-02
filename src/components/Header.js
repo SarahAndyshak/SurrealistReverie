@@ -1,35 +1,34 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
-const HelpQueueHeader = styled.h1`
-  font-size: 24px;
-  text-align: center;
+const StyledHeader = styled.header`
+  width: 100%;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: chartreuse;
   color: white;
-  background-color: purple;
-`;
 
-const StyledWrapper = styled.section`
-  background-color: orange;
+  & > h1 {
+    font-size: 2.5rem;
+  }
 `;
 
 function Header(){
   return (
-    <StyledWrapper>
-    <React.Fragment>
-      <HelpQueueHeader>
-      <h1> Help Queue</h1>
-      </HelpQueueHeader>
+    <StyledHeader>
+      <h1>Surrealist Reverie</h1>
       <ul>
-        <li>
+        {/* <li>
           <Link to="/">Home</Link>
         </li>
         <li>
           <Link to="/sign-in">Sign In</Link>
-        </li>
+        </li> */}
       </ul>
-    </React.Fragment>
-    </StyledWrapper>
+    </StyledHeader>
   );
 }
 

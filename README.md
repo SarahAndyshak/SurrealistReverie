@@ -1,4 +1,4 @@
-#### Memory Lane
+#### Surrealist Reverie
 
 ## Description
 A React application that stores memories so we don't have to store them ourselves anymore. This app includes: 
@@ -9,31 +9,7 @@ A React application that stores memories so we don't have to store them ourselve
 * Ability to associate memories with specific users.
 
 ## Technologies Used:
-
-
-## Project File Planning:
-App
-Router
-  Header/
-  Routes
-    /signin
-    SignInForm (login and register)
-    MemoryControl?:
-
-    /home
-    logged in:
-    (MemoryInputForm
-    OR
-    /home/memories
-    MemoryList
-      /home/memories/memoryID
-      MemoryDetail)
-    not logged in:
-    "you're not logged in!"
-
-    /Routes
-  Footer
-/Router
+TBA
 
 ## Available Scripts
 
@@ -46,11 +22,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 

@@ -1,4 +1,4 @@
-Prompt #2: Memory Lane
+Sureralist Reverie
 
 Create an application that stores our memories so we don't have to store them ourselves anymore! Implementation is up to you — it could be a surreal exploration of dreams and the subconscious — or it could be a more practical collection of technical information you've learned and want to store in flashcard form.
 
@@ -9,3 +9,26 @@ User authentication and basic authorization.
 Routing with react-router.
 Ability to associate memories with specific users.
 
+## Project File Planning:
+App
+Router
+  Header/
+  Routes
+    /signin
+    SignInForm (login and register)
+    DreamControl?:
+
+    /home
+    logged in:
+    (DreamInputForm
+    OR
+    /home/memories
+    DreamList
+      /home/memories/memoryID
+      DreamDetail)
+    not logged in:
+    "you're not logged in!"
+
+    /Routes
+  Footer
+/Router
