@@ -1,6 +1,6 @@
 import { auth } from "./../firebase.js";
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import styled from 'styled-components';
 
 const StyledSignin = styled.div`
@@ -10,7 +10,6 @@ const StyledSignin = styled.div`
 function SignIn() {
   const [signUpSuccess, setSignUpSuccess] = useState(null);
   const [signInSuccess, setSignInSuccess] = useState(null);
-  const [signOutSuccess, setSignOutSuccess] = useState(null);
 
   function doSignUp(event) {
     event.preventDefault();
@@ -40,15 +39,6 @@ function SignIn() {
       });
   }
 
-  function doSignOut() {
-    signOut(auth)
-      .then(function() {
-        setSignOutSuccess("You have successfully signed out!");
-      }).catch(function(error) {
-        setSignOutSuccess(`There was an error signing out: ${error.message}!`);
-      });
-  }
-
   return (
     <StyledSignin>
       <h1>Sign up</h1>
@@ -65,10 +55,6 @@ function SignIn() {
         <input type="password" name="signinPassword" placeholder="Password" />
         <button type="submit">Sign in</button>
       </form>
-      <h1>Sign Out</h1>
-      {signOutSuccess}
-      <br />
-      <button onClick={doSignOut}>Sign out</button>
     </StyledSignin>
   );
 }

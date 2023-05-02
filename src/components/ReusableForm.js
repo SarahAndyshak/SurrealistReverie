@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const StyledReusableForm = styled.div`
   max-width: 80vw;
+  min-width: 40vw;
   & > form {
     display: flex;
     flex-direction: column;
@@ -28,19 +29,26 @@ function ReusableForm(props) {
         <input
           type="text"
           name="place"
-          placeholder=" Landscape or Environment" />
+          // placeholder={props.type === 'edit' ? props.dream.place : " Landscape or Environment"} 
+          placeholder=" Landscape or Environment"
+        />
         <input
           type="text"
           name="length"
-          placeholder=" Perceived duration" />
+          // placeholder={props.type === 'edit' ? props.dream.length : " Perceived duration"} 
+          placeholder=" Perceived duration"
+        />
         <input
           type="text"
           name="characters"
-          placeholder=" Worldly beings" />
+          // placeholder={props.type === 'edit' ? props.dream.characters : " Worldly beings" } 
+          placeholder=" Worldly beings"
+        />
         <textarea
           type="text"
           name="body"
-          placeholder=" What happened?"
+          // placeholder={props.type === 'edit' ? props.dream.body : " What happened?" }
+          placeholder=" What happened"
           rows="6" />
         <button type="submit">{props.buttonText}</button>
       </form>
@@ -50,7 +58,9 @@ function ReusableForm(props) {
 
 ReusableForm.propTypes = {
   formSubmissionHandler: PropTypes.func,
-  buttonText: PropTypes.string
+  buttonText: PropTypes.string,
+  dream: PropTypes.object,
+  type: PropTypes.string,
 };
 
 export default ReusableForm;

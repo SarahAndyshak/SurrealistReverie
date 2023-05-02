@@ -1,22 +1,25 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 const StyledDream = styled.li`
   position: relative;
   // border: 0.25rem solid #00000066;
-  border-radius: 40%;
+  border-radius: 45%;
   background-color: #ddd;
   color: #222;
-  padding: 1rem 2rem;
+  padding: 1.5rem 2rem;
   z-index: 0;
 
+  filter: drop-shadow(0 0 0.75rem #00000099);
+
   & > p {
-    font-size: 0.75rem;
+    font-size: 80%;
   }
 
   &:before, :after {
     content: '';
-    width: 60%;
+    width: 55%;
     height: 100%;
     background-color: inherit;
     position: absolute;
@@ -36,16 +39,19 @@ const StyledDream = styled.li`
   & > .button-area {
     width: 100%;
     display: flex;
+    justify-content: center;
     gap: 1rem;
   }
-
 `;
-
-
 
 function Dream(props) {
 
   const { onClickDelete, onClickEdit } = props;
+
+  function handleClickEdit() {
+    props.onDreamSelection(props.id);
+    onClickEdit(props.id)
+  }
 
   return (
     <StyledDream>
@@ -53,7 +59,7 @@ function Dream(props) {
       <h4>I was in {props.place} for {props.length} with {props.characters}</h4>
       <p>{props.body}</p>
       <div className='button-area'>
-        <button onClick={() => onClickEdit(props.id)}>Revise Reverie</button>
+        <Link to="/edit"><button onClick={handleClickEdit}>Revise Reverie</button></Link>
         <button onClick={() => onClickDelete(props.id)}>Remove Reverie</button>
       </div>
     </StyledDream>
@@ -67,7 +73,8 @@ Dream.propTypes = {
   body: PropTypes.string,
   id: PropTypes.string,
   onClickEdit: PropTypes.func,
-  onClickDelete: PropTypes.func
+  onClickDelete: PropTypes.func,
+  onDreamSelection: PropTypes.func
 };
 
 export default Dream;

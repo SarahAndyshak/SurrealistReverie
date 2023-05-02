@@ -3,7 +3,9 @@
 :root {
   --actual-height: 100vh;
   --header-height: 5rem;
-  --footer-height: 3rem;
+  --footer-height: 4rem;
+
+  --letter-animation-speed: 300ms;
 }
 
 *, * *, * * * {
@@ -15,7 +17,24 @@ body {
   font-family: 'Princess Sofia', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
+  /* background-color: black; */
+}
+
+#title-area {
+  display: flex;
+  font-size: 2.5rem;
+  text-shadow: 0 0 0.5rem #00000099;
+}
+
+.title-letter {
+  opacity: 0;
+  scale: 1.5;
+  transition: all var(--letter-animation-speed) ease;
+}
+
+.title-letter.revealed {
+  scale: 1;
+  opacity: 1;
 }
 
 h1, h2, h3, h4 {

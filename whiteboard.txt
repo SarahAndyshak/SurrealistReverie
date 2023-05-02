@@ -32,3 +32,25 @@ Router
     /Routes
   Footer
 /Router
+
+EOD Tuesday:
+
+Sign in and sign out toggles slightly odd
+
+Working on Edit button >> 
+ERROR
+props.onDreamSelection is not a function
+
+ERROR
+Cannot read properties of null (reading 'place')
+TypeError: Cannot read properties of null (reading 'place')
+    at EditDream (http://localhost:3000/main.9817bbcb13f5a3cb623c.hot-update.js:45:37)
+    at renderWithHooks (http://localhost:3000/static/js/bundle.js:62793:22)
+    at updateFunctionComponent (http://localhost:3000/static/js/bundle.js:65675:24)
+    at beginWork (http://localhost:3000/static/js/bundle.js:67387:20)
+    at HTMLUnknownElement.callCallback (http://localhost:3000/static/js/bundle.js:52385:18)
+    at Object.invokeGuardedCallbackDev (http://localhost:3000/static/js/bundle.js:52429:20)
+    at invokeGuardedCallback (http://localhost:3000/static/js/bundle.js:52486:35)
+    at beginWork$1 (http://localhost:3000/static/js/bundle.js:72360:11)
+    at performUnitOfWork (http://localhost:3000/static/js/bundle.js:71607:16)
+    at workLoopSync (http://localhost:3000/static/js/bundle.js:71530:9)

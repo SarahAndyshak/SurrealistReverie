@@ -8,6 +8,11 @@ const StyledDreamList = styled.div`
   width: 80vw;
   padding: 1rem;
   margin-bottom: 1rem;
+
+  & > h1 {
+    margin-bottom: 4rem;
+    text-align: center;
+  }
   
   & > ul {
     padding: 0.5rem;
@@ -21,7 +26,7 @@ const StyledDreamList = styled.div`
 function DreamList(props) {
   return (
     <StyledDreamList>
-      <h2>Dream List</h2>
+      <h1>Dream List</h1>
       <ul>
         {props.dreamList.map((dream) =>
           <Dream
@@ -29,6 +34,7 @@ function DreamList(props) {
             key={dream.id}
             onClickEdit={props.handleClickEdit}
             onClickDelete={props.handleClickDelete}
+            onDreamSelection={props.handleChangingSelectedDream}
           />
         )}
       </ul>
@@ -41,6 +47,7 @@ DreamList.propTypes = {
   dreamList: PropTypes.array,
   handleClickEdit: PropTypes.func,
   handleClickDelete: PropTypes.func,
+  handleChangingSelectedDream: PropTypes.func
 }
 
 export default DreamList;

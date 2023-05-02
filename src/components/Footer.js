@@ -10,13 +10,22 @@ const StyledFooter = styled.footer`
 
   & > h4 {
     font-size: 1.25rem;
+    text-align: center;
   }
 `;
 
 function Footer() {
   return (
     <StyledFooter>
-      <h4>footer placeholder</h4>
+      <h4>"Hold fast to dreams 
+For if dreams die
+Life is a broken-winged bird
+That cannot fly.
+
+Hold fast to dreams
+For when dreams go
+Life is a barren field
+Frozen with snow." <em>-Langston Hughes</em></h4>
     </StyledFooter>
   );
 }
