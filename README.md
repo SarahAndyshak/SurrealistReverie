@@ -1,6 +1,39 @@
-# Getting Started with Create React App
+#### Memory Lane
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+A React application that stores memories so we don't have to store them ourselves anymore. This app includes: 
+
+* Full CRUD functionality with hooks and Firestore.
+* User authentication and basic authorization.
+* Routing with react-router.
+* Ability to associate memories with specific users.
+
+## Technologies Used:
+
+
+## Project File Planning:
+App
+Router
+  Header/
+  Routes
+    /signin
+    SignInForm (login and register)
+    MemoryControl?:
+
+    /home
+    logged in:
+    (MemoryInputForm
+    OR
+    /home/memories
+    MemoryList
+      /home/memories/memoryID
+      MemoryDetail)
+    not logged in:
+    "you're not logged in!"
+
+    /Routes
+  Footer
+/Router
 
 ## Available Scripts
 
@@ -39,33 +72,10 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Known Bugs
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+_[MIT](https://opensource.org/license/mit/)_
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# MemoryLane
+Copyright (c) _2023_

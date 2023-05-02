@@ -1,0 +1,11 @@
+Prompt #2: Memory Lane
+
+Create an application that stores our memories so we don't have to store them ourselves anymore! Implementation is up to you — it could be a surreal exploration of dreams and the subconscious — or it could be a more practical collection of technical information you've learned and want to store in flashcard form.
+
+Try adding the following:
+
+Full CRUD functionality with hooks and Firestore.
+User authentication and basic authorization.
+Routing with react-router.
+Ability to associate memories with specific users.
+
