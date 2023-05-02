@@ -5,24 +5,31 @@ const StyledDreamListItem = styled.li`
   position: relative;
   border: 0.25rem solid #00000066;
   border-radius: 1rem;
-  background-color: orange;
+  background-color: #ddd;
   color: #222;
   padding: 1rem;
+  z-index: 0;
 
-  :before {
-    content: '';
-    width: 50%;
-    height: 100%;
-    background-color: pink;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 50%;
-  }
+  // &:before, :after {
+  //   content: '';
+  //   width: 70%;
+  //   height: 100%;
+  //   background-color: inherit;
+  //   position: absolute;
+  //   top: -3rem;
+  //   left: -3rem;
+  //   border-radius: 50%;
+  //   z-index: -1;
+  // }
+
+  // &:after {
+  //   bottom: -3rem;
+  //   right: -3rem;
+  // }
+
 `;
 
 function DreamListItem(props) {
-  // const { dream, onClickingDelete, onClickingEdit } = props;
 
   return (
     <StyledDreamListItem>
@@ -37,7 +44,8 @@ DreamListItem.propTypes = {
   place: PropTypes.string,
   length: PropTypes.string,
   characters: PropTypes.string,
-  body: PropTypes.string
+  body: PropTypes.string,
+  id: PropTypes.string
 };
 
 export default DreamListItem;
