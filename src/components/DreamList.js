@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import PropTypes from "prop-types";
 
 const StyledDreamList = styled.div`
-  background-color: salmon;
+  // background-color: salmon;
   width: 80vw;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -19,11 +19,14 @@ const StyledDreamList = styled.div`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 4rem;
+    gap: 5rem;
   }
 `;
 
+
 function DreamList(props) {
+  console.log('DreamList props.dreamList is');
+  console.table(props.dreamList);
   return (
     <StyledDreamList>
       <h1 style={{display: 'flex', justifyContent: 'center', gap: '0.5rem'}}><div style={{ transform: 'scaleX(-1)'}}>✨</div> Dream List <div>✨</div></h1>

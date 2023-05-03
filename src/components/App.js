@@ -19,9 +19,10 @@ import SignIn from "./SignIn";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import React from "react";
+import { populateBubbles } from "../bubbles";
+
 
 const StyledApp = styled.main`
-  background-color: #222;
   font-size: 20pt;
   color: #ddd;
   display: flex;
@@ -32,14 +33,26 @@ const StyledApp = styled.main`
   opacity: 0;
   scale: 1.1;
 
+  overflow: hidden;
+
   transition: opacity 500ms ease, scale 500ms ease;
 `;
 
 function App() {
-    useEffect(() => {
+
+  const navigate = useNavigate(); // this can be at the top, it just needs to be inside the main function
+  const [ addedBubbles, setAddedBubbles ] = useState(false);
+  useEffect(() => {
     document.getElementsByTagName('main')[0].style.opacity = 1;
     document.getElementsByTagName('main')[0].style.scale = 1;
   });
+
+  useEffect(() => {
+    if (!addedBubbles) {
+      populateBubbles(80, '#fancy-bg');
+      setAddedBubbles(true);
+    }
+  }, [ addedBubbles ]);
 
   useEffect(() => {
     const unSubscribe = onSnapshot(
@@ -52,7 +65,9 @@ function App() {
             length: doc.data().length,
             characters: doc.data().characters,
             body: doc.data().body,
+            userId: doc.data().userId,
             id: doc.id,
+            email: doc.data().email,
           });
         });
         setMainDreamList(dreams);
@@ -73,8 +88,6 @@ function App() {
   const handleClickEdit = () => {
     setEditing(true);
   };
-  
-  const navigate = useNavigate();
 
   async function handleEditingDreamInList(dreamToEdit) {
     if (auth.currentUser) {
@@ -94,6 +107,7 @@ function App() {
   };
 
   async function useHandleAddingNewDreamToList(newDreamData) {
+    console.log('useHandleAddingNewDreamToList newDreamData', newDreamData)
     await addDoc(collection(db, "dreams"), newDreamData);
     navigate('/');
   };
@@ -108,6 +122,8 @@ function App() {
   }
 
   return (
+    <>
+    <div id='fancy-bg'></div>
     <StyledApp>
       <Header 
         currentUser={currentUser} 
@@ -122,7 +138,10 @@ function App() {
         {currentUser && <Route
           path="/add-new"
           element={
-            <DreamInput onNewDreamCreation={useHandleAddingNewDreamToList} />
+            <DreamInput 
+              onNewDreamCreation={useHandleAddingNewDreamToList} 
+              currentUser={currentUser}
+            />
           }
         />}
         {currentUser && <Route
@@ -139,12 +158,14 @@ function App() {
               onDreamSelection={handleChangingSelectedDream}
               handleClickEdit={handleClickEdit}
               handleClickDelete={handleClickDelete}
+              
             />
           }
         />
       </Routes>
       <Footer />
     </StyledApp>
+    </>
   );
 }
 

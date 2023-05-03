@@ -12,10 +12,11 @@ const StyledDream = styled.li`
   padding: 1.5rem 2rem;
   z-index: 0;
 
-  filter: drop-shadow(0 0 0.75rem #00000099);
+  filter: drop-shadow(0 0 0.75rem #00000055);
 
   & > p {
     font-size: 80%;
+    text-align: center;
   }
 
   &:before, :after {
@@ -28,15 +29,23 @@ const StyledDream = styled.li`
     left: -3rem;
     border-radius: 50%;
     z-index: -1;
+    transform-origin: 52% 48%;
+    animation-name: spin;
+    animation-duration: 7500ms;
+    animation-timing-function: linear;
+    animation-play-state: running;
+    animation-iteration-count: infinite;
   }
-
+  
   &:after {
+    animation-name: spin-cc;
+    width: 60%;
     top: unset;
     left: unset;
     bottom: -3rem;
     right: -3rem;
   }
-
+  
   & > .button-area {
     width: 100%;
     display: flex;
@@ -64,12 +73,15 @@ function Dream(props) {
     props.onDreamSelection(props.id);
     onClickEdit(props.id)
   }
-
+  
   return (
     <StyledDream>
       <h1>dreamy details</h1>
       <h4>I was in {props.place} for {props.length} with {props.characters}</h4>
       <p>{props.body}</p>
+      {/* <p>dream ID: {props.id}</p> */}
+      {/* <p style={{fontFamily: 'sans-serif', fontSize: '60%'}}>dreamt by user ID: {props.userId}</p> */}
+      <p>dreamt by: {props.email}</p>
       <div className={`button-area${!auth.currentUser ? ' hidden' : ''}`}>
         <Link to="/edit"><button onClick={handleClickEdit}>Revise Reverie</button></Link>
         <button onClick={() => onClickDelete(props.id)}>Remove Reverie</button>
@@ -84,6 +96,8 @@ Dream.propTypes = {
   characters: PropTypes.string,
   body: PropTypes.string,
   id: PropTypes.string,
+  userId: PropTypes.string,
+  email: PropTypes.string,
   onClickEdit: PropTypes.func,
   onClickDelete: PropTypes.func,
   onDreamSelection: PropTypes.func

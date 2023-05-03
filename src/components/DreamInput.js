@@ -5,12 +5,17 @@ import ReusableForm from "./ReusableForm";
 function DreamInput(props) {
 
   function handleNewDreamSubmission(event) {
+    console.log('USER -----------------------------')
+    console.log(props.currentUser)
+    console.log('USER -----------------------------')
     event.preventDefault();
     props.onNewDreamCreation({
       place: event.target.place.value,
       length: event.target.length.value,
       characters: event.target.characters.value,
-      body: event.target.body.value
+      body: event.target.body.value,
+      userId: props.currentUser.uid,
+      email: props.currentUser.email,
     });
   }
 
@@ -28,7 +33,9 @@ DreamInput.propTypes ={
   // length: PropTypes.string,
   // characters: PropTypes.string,
   // body: PropTypes.string,
-  onNewDreamCreation: PropTypes.func
+  onNewDreamCreation: PropTypes.func,
+  userId: PropTypes.string,
+  email: PropTypes.string
 };
 
 export default DreamInput;

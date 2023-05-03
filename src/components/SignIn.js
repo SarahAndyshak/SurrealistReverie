@@ -12,7 +12,7 @@ const StyledSignin = styled.div`
 function SignIn(props) {
   const [signUpSuccess, setSignUpSuccess] = useState(null);
   const [signInSuccess, setSignInSuccess] = useState(null);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // can be at the top as long as it's inside the main function
 
   function doSignUp(event) {
     event.preventDefault();

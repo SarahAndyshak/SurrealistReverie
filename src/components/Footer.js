@@ -7,6 +7,7 @@ const StyledFooter = styled.footer`
   align-items: center;
   justify-content: center;
   background-color: purple;
+  box-shadow: 0 0 1rem #00000099;
 
   & > h4 {
     font-size: 1.25rem;

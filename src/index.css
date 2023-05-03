@@ -4,8 +4,18 @@
   --actual-height: 100vh;
   --header-height: 5rem;
   --footer-height: 4rem;
+  --header-color: purple;
+  --footer-color: purple;
 
   --letter-animation-speed: 300ms;
+
+  --bubble-color: rgba(100, 34, 128, 0.5);
+  --bubble-opacity: 1;
+  --bubble-amount: 40;
+  --bubble-weave-amount: 2rem;
+  
+  --bg-color-1: rgba(0, 85, 128, 0.5);
+  --bg-color-2: lightblue;
 }
 
 *, * *, * * * {
@@ -17,7 +27,7 @@ body {
   font-family: 'Princess Sofia', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: black; */
+  overflow-x: hidden;
 }
 
 #title-area {
@@ -39,7 +49,7 @@ body {
 
 h1, h2, h3, h4 {
   margin: 0;
-  text-shadow: 0 0 0.5rem #00000099;
+  text-shadow: 0 0 0.325rem #00000088;
 }
 h2, h3, h4 {
   font-weight: normal;
@@ -55,7 +65,7 @@ input, textarea {
   font-family: inherit;
   font-size: 1.5rem;
   padding: 0.5rem;
-  border-radius: 0.5rem
+  border-radius: 0.5rem;
 }
 
 button {
@@ -67,13 +77,98 @@ button {
   cursor: pointer;
   transition: all 300ms ease;
   background-color: purple;
+  color: #ddd;
 }
 
 button:hover {
   scale: 1.1;
+  color: #afa;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#fancy-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  max-width: 100%;
+  min-height: var(--actual-height);
+  height: var(--actual-height);
+  /* height: 100%; */
+  background-image: linear-gradient(var(--bg-color-1), var(--bg-color-2) 50%, var(--bg-color-1));
+  background-attachment: local;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bubble {
+  --rise-speed: 3s;
+  --weave-speed: 1s;
+  --size: 2rem;
+  position: absolute;
+  left: 0;
+  bottom: -3rem;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.5), var(--bubble-color));
+  animation: rise var(--rise-speed) linear 0ms infinite normal forwards,
+    weave var(--weave-speed) ease-in-out 0ms infinite alternate;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  opacity: var(--bubble-opacity);
+}
+
+@keyframes rise {
+  from {
+    bottom: -2rem;
+  }
+  to {
+    bottom: calc(var(--actual-height) + 3rem);
+  }
+}
+
+@keyframes weave {
+  from {
+    transform: translateX(calc(var(--bubble-weave-amount) * -1));
+  }
+  to {
+    transform: translateX(var(--bubble-weave-amount));
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-cc {
+  from {
+    transform: rotate(360deg);
+    margin-top: -1rem;
+  }
+  to {
+    transform: rotate(0deg);
+    margin-top: 1rem;
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    margin-top: -1rem;
+  }
+  to {
+    transform: scale(1.1);
+    margin-top: 1rem;
+  }
+}
+
+

@@ -15,8 +15,9 @@ const StyledHeader = styled.header`
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
-  background-color: chartreuse;
+  background-color: var(--header-color);
   color: white;
+  box-shadow: 0 0 1rem #00000099;
 
   & li {
     width: max-content;
@@ -31,10 +32,20 @@ const StyledHeader = styled.header`
     align-items: center;
     gap: 1.5rem;
 
+    & a {
+      color: unset;
+      transition: all 200ms ease;
+    }
+    
+    & a:hover {
+      color: pink;
+    }
+
     & button {
-      height: 4rem;
+      height: 3rem;
       font-size: 1.25rem;
       padding: 0 1rem;
+      background-color: maroon;
     }
   }
 `;
