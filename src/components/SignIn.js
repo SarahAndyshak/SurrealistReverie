@@ -2,14 +2,17 @@ import { auth } from "./../firebase.js";
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import PropTypes from "prop-types";
 
 const StyledSignin = styled.div`
 
 `;
 
-function SignIn() {
+function SignIn(props) {
   const [signUpSuccess, setSignUpSuccess] = useState(null);
   const [signInSuccess, setSignInSuccess] = useState(null);
+  const navigate = useNavigate();
 
   function doSignUp(event) {
     event.preventDefault();
@@ -20,7 +23,7 @@ function SignIn() {
         setSignUpSuccess(
           `You've successfully signed up, ${userCredential.user.email}!`
         );
-
+        navigate('/');
       })
       .catch((error) => {
         setSignUpSuccess(`There was an error signing up: ${error.message}!`);
@@ -33,7 +36,9 @@ function SignIn() {
     const password = event.target.signinPassword.value;
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        setSignInSuccess(`You've successfully signed in as ${userCredential.user.email}!`)
+        setSignInSuccess(`You've successfully signed in as ${userCredential.user.email}!`);
+        props.handleSettingCurrentUser(userCredential.user);
+        navigate('/'); // this is where we call navigate to go home
       })
       .catch((error) => {
         setSignInSuccess(`There was an error signing in: ${error.message}!`)
@@ -58,6 +63,10 @@ function SignIn() {
       </form>
     </StyledSignin>
   );
+}
+
+SignIn.propTypes = {
+  handleSettingCurrentUser: PropTypes.func,
 }
 
 export default SignIn

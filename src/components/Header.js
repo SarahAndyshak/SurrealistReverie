@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import { auth } from "./../firebase.js";
 import { signOut } from "firebase/auth";
+import PropTypes from "prop-types";
 
 const pause = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-
 
 const StyledHeader = styled.header`
   width: 100vw;
@@ -40,7 +39,7 @@ const StyledHeader = styled.header`
   }
 `;
 
-function Header(){
+function Header(props){
 
   function createTitle(titleText) {
     const titleArea = document.getElementById("title-area");
@@ -96,12 +95,13 @@ function Header(){
     signOut(auth)
       .then(function() {
         setSignOutSuccess("You have successfully signed out!");
+        props.handleSettingCurrentUser(null);
       }).catch(function(error) {
         setSignOutSuccess(`There was an error signing out: ${error.message}!`);
       });
   }
-
-  if(auth.currentUser == null) {
+  console.log('Header props', props)
+  if(!props.currentUser) {
     return (
       <StyledHeader>
         <div id='title-area'>
@@ -137,6 +137,10 @@ function Header(){
       </StyledHeader>
     );
   }
+}
+
+Header.propTypes = {
+  currentUser: PropTypes.object,
 }
 
 export default Header;

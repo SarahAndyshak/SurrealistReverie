@@ -67,6 +67,7 @@ function App() {
   const [selectedDream, setSelectedDream] = useState(null);
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
 
   const handleClickEdit = () => {
     setEditing(true);
@@ -100,18 +101,28 @@ function App() {
     setSelectedDream(selection);
   };
 
+  function handleSettingCurrentUser(userObj) {
+    setCurrentUser(userObj);
+  }
+
   return (
     <StyledApp>
-      <Header />
+      <Header 
+        currentUser={currentUser} 
+        handleSettingCurrentUser={handleSettingCurrentUser}
+      />
       <Routes>
-        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-in" element={
+          <SignIn 
+            handleSettingCurrentUser={handleSettingCurrentUser}
+          />
+        } />
         {auth.currentUser && <Route
           path="/add-new"
           element={
             <DreamInput onNewDreamCreation={useHandleAddingNewDreamToList} />
           }
         />}
-
         {auth.currentUser && <Route
           path="/edit"
           element={<EditDream

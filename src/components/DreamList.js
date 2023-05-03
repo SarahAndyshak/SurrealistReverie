@@ -26,7 +26,7 @@ const StyledDreamList = styled.div`
 function DreamList(props) {
   return (
     <StyledDreamList>
-      <h1>✨Dream List</h1>
+      <h1>✨ Dream List ✨</h1>
       <ul>
         {props.dreamList.map((dream) =>
           <Dream

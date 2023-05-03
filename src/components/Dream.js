@@ -44,10 +44,9 @@ const StyledDream = styled.li`
     gap: 1rem;
 
     &.hidden {
-      opacity: 0.2;
+      opacity: 0;
       pointer-events: none;
       tranform: scaleY(20%);
-      height: 0;
 
       & button {
         padding: unset;
