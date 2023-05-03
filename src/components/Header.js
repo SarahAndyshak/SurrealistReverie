@@ -4,9 +4,13 @@ import styled from 'styled-components';
 import { auth } from "./../firebase.js";
 import { signOut } from "firebase/auth";
 
+const pause = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+
 
 const StyledHeader = styled.header`
-  width: 100%;
+  width: 100vw;
+  max-width: 100vw;
   height: var(--header-height);
   display: flex;
   align-items: center;
@@ -14,6 +18,10 @@ const StyledHeader = styled.header`
   padding: 0 2rem;
   background-color: chartreuse;
   color: white;
+
+  & li {
+    width: max-content;
+  }
 
   & > h1 {
     font-size: 2.5rem;
@@ -23,10 +31,65 @@ const StyledHeader = styled.header`
     display: flex;
     align-items: center;
     gap: 1.5rem;
+
+    & button {
+      height: 4rem;
+      font-size: 1.25rem;
+      padding: 0 1rem;
+    }
   }
 `;
 
 function Header(){
+
+  function createTitle(titleText) {
+    const titleArea = document.getElementById("title-area");
+    const titleArray = titleText.split("");
+    for (let i = 0; i < titleArray.length; i++) {
+      let printedChar;
+      if (titleArray[i] === " ") {
+        printedChar = "&nbsp;";
+      } else {
+        printedChar = titleArray[i];
+      }
+      titleArea.innerHTML += `
+        <span class='title-letter' id='title-letter-${i}'>
+          ${printedChar}
+        </span>
+      `;
+    }
+  }
+  
+  async function revealTitle(options) {
+    // options = {
+    //   revealSpeed: '150',
+    //   letterAnimationSpeed: '400'
+    // }
+    document.documentElement.style.setProperty(
+      "--letter-animation-speed",
+      options.letterAnimationSpeed + "ms"
+    );
+    const titleArea = document.getElementById("title-area");
+    const titleArray = titleArea.innerText.split("");
+    for (let i = 0; i < titleArray.length; i++) {
+      const currentLetter = document.getElementById(`title-letter-${i}`);
+      currentLetter.classList.add("revealed");
+      await pause(options.revealSpeed);
+    }
+  }
+
+  function animateTitle() {
+    createTitle('Surrealist Reveries');
+    revealTitle({
+      revealSpeed: '150',
+      letterAnimationSpeed: '400'
+    });
+  }
+
+  useEffect(() => {
+    // animateTitle();
+  });
+
   const [signOutSuccess, setSignOutSuccess] = useState(null);
   
   function doSignOut() {
@@ -41,7 +104,9 @@ function Header(){
   if(auth.currentUser == null) {
     return (
       <StyledHeader>
-        <h1>Surrealist Reveries</h1>
+        <div id='title-area'>
+        Surrealist Reveries
+        </div>
         <ul className='link-area'>
           <li>
             <Link to="/">Home</Link>
@@ -56,14 +121,14 @@ function Header(){
     return (
       <StyledHeader>
         <div id='title-area'>
-          Surrealist Reveries
+        Surrealist Reveries
         </div>
         <ul className='link-area'>
           <li>
             <p><Link to="/">Home</Link></p>
           </li>
           <li>
-            <p><Link to="/add-new">Add New Dream</Link></p>
+            <Link to="/add-new">Add New Dream</Link>
           </li>
           <li>
             <button onClick={doSignOut}>Sign out</button>

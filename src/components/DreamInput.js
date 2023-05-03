@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import ReusableForm from "./ReusableForm";
 
 function DreamInput(props) {
+
   function handleNewDreamSubmission(event) {
+    event.preventDefault();
     props.onNewDreamCreation({
       place: event.target.place.value,
       length: event.target.length.value,

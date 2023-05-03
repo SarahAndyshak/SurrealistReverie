@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
+import { auth } from '../firebase';
 
 const StyledDream = styled.li`
   position: relative;
@@ -41,6 +42,18 @@ const StyledDream = styled.li`
     display: flex;
     justify-content: center;
     gap: 1rem;
+
+    &.hidden {
+      opacity: 0.2;
+      pointer-events: none;
+      tranform: scaleY(20%);
+      height: 0;
+
+      & button {
+        padding: unset;
+        height: 0;
+      }
+    }
   }
 `;
 
@@ -58,7 +71,7 @@ function Dream(props) {
       <h1>dreamy details</h1>
       <h4>I was in {props.place} for {props.length} with {props.characters}</h4>
       <p>{props.body}</p>
-      <div className='button-area'>
+      <div className={`button-area${!auth.currentUser ? ' hidden' : ''}`}>
         <Link to="/edit"><button onClick={handleClickEdit}>Revise Reverie</button></Link>
         <button onClick={() => onClickDelete(props.id)}>Remove Reverie</button>
       </div>

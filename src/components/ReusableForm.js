@@ -22,33 +22,36 @@ const StyledReusableForm = styled.div`
 `;
 
 function ReusableForm(props) {
-
+  if (props.type === 'edit') {
+    console.log('ResuableForm is type EDIT');
+    console.log('received dream', props.dream)
+  }
   return (
     <StyledReusableForm>
       <form onSubmit={props.formSubmissionHandler}>
         <input
           type="text"
           name="place"
-          // placeholder={props.type === 'edit' ? props.dream.place : " Landscape or Environment"} 
-          placeholder=" Landscape or Environment"
+          defaultValue={props.type === 'edit' ? props.dream.place : ""}
+          placeholder={props.type !== 'edit' ? ' Landscape or Environment' : ''}
         />
         <input
           type="text"
           name="length"
-          // placeholder={props.type === 'edit' ? props.dream.length : " Perceived duration"} 
-          placeholder=" Perceived duration"
+          defaultValue={props.type === 'edit' ? props.dream.length : ""} 
+          placeholder={props.type !== 'edit' ? " Perceived duration" : ""}
         />
         <input
           type="text"
           name="characters"
-          // placeholder={props.type === 'edit' ? props.dream.characters : " Worldly beings" } 
-          placeholder=" Worldly beings"
+          defaultValue={props.type === 'edit' ? props.dream.characters : "" } 
+          placeholder={props.type !== 'edit' ? ' Wordly beings' : ''}
         />
         <textarea
           type="text"
           name="body"
-          // placeholder={props.type === 'edit' ? props.dream.body : " What happened?" }
-          placeholder=" What happened"
+          defaultValue={props.type === 'edit' ? props.dream.body : "" }
+          placeholder={props.type !== 'edit' ? ' What happened' : ''}
           rows="6" />
         <button type="submit">{props.buttonText}</button>
       </form>

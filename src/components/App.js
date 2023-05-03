@@ -28,76 +28,22 @@ const StyledApp = styled.main`
   justify-content: space-between;
   align-items: center;
   min-height: var(--actual-height);
+  opacity: 0;
+  scale: 1.1;
 
   transition: opacity 500ms ease, scale 500ms ease;
 `;
 
-/////////////////////////////////////////////////////////
-
-const pause = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-function createTitle(titleText) {
-  const titleArea = document.getElementById("title-area");
-  const titleArray = titleText.split("");
-  for (let i = 0; i < titleArray.length; i++) {
-    let printedChar;
-    if (titleArray[i] === " ") {
-      printedChar = "&nbsp;";
-    } else {
-      printedChar = titleArray[i];
-    }
-    titleArea.innerHTML += `
-      <span class='title-letter' id='title-letter-${i}'>
-        ${printedChar}
-      </span>
-    `;
-  }
-}
-
-async function revealTitle(options) {
-  // options = {
-  //   revealSpeed: '150',
-  //   letterAnimationSpeed: '400'
-  // }
-  document.documentElement.style.setProperty(
-    "--letter-animation-speed",
-    options.letterAnimationSpeed + "ms"
-  );
-  const titleArea = document.getElementById("title-area");
-  const titleArray = titleArea.innerText.split("");
-  for (let i = 0; i < titleArray.length; i++) {
-    const currentLetter = document.getElementById(`title-letter-${i}`);
-    currentLetter.classList.add("revealed");
-    await pause(options.revealSpeed);
-  }
-}
-
-/////////////////////////////////////////////////////////////////////
-
 function App() {
-  // useEffect(() => {
-  // document.getElementsByTagName('main')[0].style.opacity = 1;
-  // document.getElementsByTagName('main')[0].style.scale = 1;
-
-  // useEffect(() => {
-    // try {
-    //   createTitle('Surrealist Reveries');
-    //   revealTitle({
-    //     revealSpeed: '150',
-    //     letterAnimationSpeed: '400'
-    //   });
-    // }
-    // catch {
-    //   console.log("header title didn't fancy")
-    // }
-  // }, []);
+    useEffect(() => {
+    document.getElementsByTagName('main')[0].style.opacity = 1;
+    document.getElementsByTagName('main')[0].style.scale = 1;
+  });
 
   useEffect(() => {
     const unSubscribe = onSnapshot(
       collection(db, "dreams"),
       (collectionSnapshot) => {
-        // const unSubscribe = onSnapshot(
-        //   (collectionSnapshot) => {
         const dreams = [];
         collectionSnapshot.forEach((doc) => {
           dreams.push({
@@ -121,42 +67,32 @@ function App() {
   const [selectedDream, setSelectedDream] = useState(null);
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState(null);
-  const [dreamList, setDreamList] = useState([
-    {
-      place: "Zimbabwe",
-      length: "12 minutes",
-      characters: "Romy and Michele",
-      body: "We went to Ikea and bought a brass waterbed",
-      id: v4(),
-    },
-    {
-      place: "Milan, Italy",
-      length: "12 days",
-      characters: "Willem Dafoe",
-      body: "An idyllic odyssey through the sparkling rivers of south Milan",
-      id: v4(),
-    },
-  ]);
 
   const handleClickEdit = () => {
     setEditing(true);
   };
 
   const handleEditingDreamInList = async (dreamToEdit) => {
-    const dreamRef = doc(db, "dreams", dreamToEdit.id);
-    await updateDoc(dreamRef, dreamToEdit);
-    setEditing(false);
-    setSelectedDream(null);
+    if (auth.currentUser) {
+      const dreamRef = doc(db, "dreams", dreamToEdit.id);
+      window.history.back();
+      await updateDoc(dreamRef, dreamToEdit);
+      setEditing(false);
+      setSelectedDream(null);
+    }
   };
 
   const handleClickDelete = async (id) => {
-    await deleteDoc(doc(db, "dreams", id));
-    setSelectedDream(null);
-    console.log("App.js handleClickDelete got id", id);
+    if (auth.currentUser) {
+      await deleteDoc(doc(db, "dreams", id));
+      setSelectedDream(null);
+      console.log("App.js handleClickDelete got id", id);
+    }
   };
 
-  const handleAddingNewDreamToList = async (newDreamData) => {
+  async function useHandleAddingNewDreamToList(newDreamData) {
     await addDoc(collection(db, "dreams"), newDreamData);
+    window.history.back();
   };
 
   const handleChangingSelectedDream = (id) => {
@@ -169,19 +105,19 @@ function App() {
       <Header />
       <Routes>
         <Route path="/sign-in" element={<SignIn />} />
-        <Route
+        {auth.currentUser && <Route
           path="/add-new"
           element={
-            <DreamInput onNewDreamCreation={handleAddingNewDreamToList} />
+            <DreamInput onNewDreamCreation={useHandleAddingNewDreamToList} />
           }
-        />
+        />}
 
-        <Route
+        {auth.currentUser && <Route
           path="/edit"
           element={<EditDream
             dream={selectedDream}
             onEditDream={handleEditingDreamInList} />}
-        />
+        />}
         <Route
           path="/"
           element={

@@ -26,7 +26,7 @@ const StyledDreamList = styled.div`
 function DreamList(props) {
   return (
     <StyledDreamList>
-      <h1>Dream List</h1>
+      <h1>✨Dream List</h1>
       <ul>
         {props.dreamList.map((dream) =>
           <Dream
@@ -34,7 +34,7 @@ function DreamList(props) {
             key={dream.id}
             onClickEdit={props.handleClickEdit}
             onClickDelete={props.handleClickDelete}
-            onDreamSelection={props.handleChangingSelectedDream}
+            onDreamSelection={props.onDreamSelection}
           />
         )}
       </ul>
@@ -47,7 +47,7 @@ DreamList.propTypes = {
   dreamList: PropTypes.array,
   handleClickEdit: PropTypes.func,
   handleClickDelete: PropTypes.func,
-  handleChangingSelectedDream: PropTypes.func
+  onDreamSelection: PropTypes.func
 }
 
 export default DreamList;

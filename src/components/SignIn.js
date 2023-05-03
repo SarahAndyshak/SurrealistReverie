@@ -20,6 +20,7 @@ function SignIn() {
         setSignUpSuccess(
           `You've successfully signed up, ${userCredential.user.email}!`
         );
+
       })
       .catch((error) => {
         setSignUpSuccess(`There was an error signing up: ${error.message}!`);
