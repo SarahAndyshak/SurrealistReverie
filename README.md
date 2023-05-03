@@ -2,7 +2,7 @@
 ### By: Eliot Gronstal, Luckie, Mike Donovan, and Sarah Andyshak
 
 ## Description
-A React application that stores memories so we don't have to store them ourselves anymore. This app includes: 
+A React application that stores dreams so we don't have to store them ourselves anymore. This app includes: 
 
 * Full CRUD functionality with hooks and Firestore.
 * User authentication and basic authorization.
@@ -10,7 +10,15 @@ A React application that stores memories so we don't have to store them ourselve
 * Ability to associate memories with specific users.
 
 ## 🧿🔮 Technologies Used:
-TBA
+* React.js
+* React Router
+* VS Code
+* Firebase | Firestore
+* CSS
+* JSX
+
+## Screen sample:
+![screenshot](SurrealistDreams.png)
 
 ## 🗿🎡 Available Scripts
 In the project directory, you can run:
