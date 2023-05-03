@@ -17,6 +17,7 @@ import {
 } from "firebase/firestore";
 import SignIn from "./SignIn";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import React from "react";
 
 const StyledApp = styled.main`
@@ -72,12 +73,14 @@ function App() {
   const handleClickEdit = () => {
     setEditing(true);
   };
+  
+  const navigate = useNavigate();
 
-  const handleEditingDreamInList = async (dreamToEdit) => {
+  async function handleEditingDreamInList(dreamToEdit) {
     if (auth.currentUser) {
       const dreamRef = doc(db, "dreams", dreamToEdit.id);
-      window.history.back();
       await updateDoc(dreamRef, dreamToEdit);
+      navigate('/');
       setEditing(false);
       setSelectedDream(null);
     }
@@ -87,13 +90,12 @@ function App() {
     if (auth.currentUser) {
       await deleteDoc(doc(db, "dreams", id));
       setSelectedDream(null);
-      console.log("App.js handleClickDelete got id", id);
     }
   };
 
   async function useHandleAddingNewDreamToList(newDreamData) {
     await addDoc(collection(db, "dreams"), newDreamData);
-    window.history.back();
+    navigate('/');
   };
 
   const handleChangingSelectedDream = (id) => {
@@ -117,13 +119,13 @@ function App() {
             handleSettingCurrentUser={handleSettingCurrentUser}
           />
         } />
-        {auth.currentUser && <Route
+        {currentUser && <Route
           path="/add-new"
           element={
             <DreamInput onNewDreamCreation={useHandleAddingNewDreamToList} />
           }
         />}
-        {auth.currentUser && <Route
+        {currentUser && <Route
           path="/edit"
           element={<EditDream
             dream={selectedDream}

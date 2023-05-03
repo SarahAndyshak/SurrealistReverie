@@ -100,7 +100,7 @@ function Header(props){
         setSignOutSuccess(`There was an error signing out: ${error.message}!`);
       });
   }
-  console.log('Header props', props)
+
   if(!props.currentUser) {
     return (
       <StyledHeader>

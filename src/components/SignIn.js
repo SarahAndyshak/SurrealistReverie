@@ -23,6 +23,7 @@ function SignIn(props) {
         setSignUpSuccess(
           `You've successfully signed up, ${userCredential.user.email}!`
         );
+        props.handleSettingCurrentUser(userCredential.user);
         navigate('/');
       })
       .catch((error) => {
